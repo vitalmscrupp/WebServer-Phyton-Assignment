@@ -64,18 +64,18 @@ class WebSever(object):
             file_request = string.split(' ')[1].split('?')[0]
             if (file_request == "/"):
                 file_request = '/index.html'
-
             file_request = self.directory + file_request
-
             try:
                 file_handler = open(file_request, 'rb')
                 response_content = file_handler.read()
                 file_handler.close()
                 response_headers = self._generate_header(200)
             except Exception as e:
+                file_request=self.directory+"/Error.html"
+                file_handler=open(file_request,'rb')
+                response_content=file_handler.read()
+                file_handler.close()
                 response_headers = self._generate_header(404)
-                response_content = b"<html><body><p>Error 404: File not found</p><p>Python HTTP server</p></body></html>"
-
             data = response_headers.encode() + response_content
             conn.send(data)
             conn.close()
