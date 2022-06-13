@@ -72,8 +72,13 @@ class WebSever(object):
                 response_headers = self._generate_header(200)
             except Exception as e:
                 file_request=self.directory+"/Error.html"
+<<<<<<< Updated upstream
                 file_handler=open(file_request,'rb')
                 response_content=file_handler.read()
+=======
+                file_handler = open(file_request, 'rb')
+                response_content = file_handler.read()
+>>>>>>> Stashed changes
                 file_handler.close()
                 response_headers = self._generate_header(404)
             data = response_headers.encode() + response_content
